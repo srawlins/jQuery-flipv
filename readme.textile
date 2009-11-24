@@ -5,61 +5,46 @@ Accessed 11/23/2009
 
 h1. Introduction
 
-With CSS2, it isn’t possible to vertically display text. The only browser suggesting a
-way is Internet Explorer, with its css attributes "filter" and "writing-mode". Example:
+With CSS2, it isn't possible to vertically display text. The only browser suggesting a way is Internet Explorer, with its css attributes "filter" and "writing-mode". Example:
 
-<pre><code>
-.verticaltext {
+<pre><code>.verticaltext {
   writing-mode: tb-rl;
   filter: flipv fliph;
 }
 </code></pre>
 
-Vertical texts can be interesting, depending on the chosen design. For example, I use it
-in the <a href="http://www.openstudio.fr/jQuery-virtual-tour.html">jQuery virtual tour
-\[fr\]</a> to display the title without hiding the panoramic view.
+Vertical texts can be interesting, depending on the chosen design. For example, I use it in the <a href="http://www.openstudio.fr/jQuery-virtual-tour.html">jQuery virtual tour [fr]</a> to display the title without hiding the panoramic view.
 
-The principle is to develop, using <a href="http://www.jquery.com/">jQuery</a>, another
-implementation for the browsers which don’t recognize writing-mode, such as firefox,
-opera, safari...
+The principle is to develop, using <a href="http://www.jquery.com/">jQuery</a>, another implementation for the browsers which don't recognize <code>writing-mode</code>, such as firefox, opera, safari...
 
-As jQuery is a non-intrusive technology, we are sure that the visitors will be able to
-access the text. In case of a fail, it will be horizontally displayed.
+As jQuery is a non-intrusive technology, we are sure that the visitors will be able to access the text. In case of a fail, it will be horizontally displayed.
 
-The most intuitive solution is to use the <code><canvas></code> tag, created by Apple and
-that is now recognized by all recent browsers: firefox, safari and opera.
+The most intuitive solution is to use the <code><canvas></code> tag, created by Apple and that is now recognized by all recent browsers: firefox, safari and opera.
 
-IE doesn’t recognize this tag, so in this case, we will keep the display based on
-<code>writing-mode</code> attribute.
+IE doesn't recognize this tag, so in this case, we will keep the display based on <code>writing-mode</code> attribute.
 
-A lack of the <code><canvas></code> tag, is that there is no native method to display
-text. The <a href="http://www.netzgesta.de/dev/text/">cvi_text_lib.js</a> library from
-netzgesta has to be used, that offer a method to write in the <code><canvas></code> tag,
-only in Verdana.
+A drawback of the <code><canvas></code> tag is that there is no native method to display text. The <a href="http://www.netzgesta.de/dev/text/">cvi_text_lib.js</a> library from netzgesta has to be used, that offers a method to write in the <code><canvas></code> tag, only in Verdana.
 
 h1. Use
 
 Insert javascript calls in the <code><head></code> section:
-<code><pre>
+<pre><code>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/cvi_text_lib.js"></script>
 <script type="text/javascript" src="js/jquery.flipv.js"></script>
-</pre></code>
+</code></pre>
 
 Simply add the "flipv" class into texts or titles you want to display verticaly.
 
-example: <code><p class='flipv'>mon texte</p></code>
+example: <code><p class='flipv'>my text</p></code>
 
-You can also insert an explicit call to flipv() method on any element in the page using a
-jQuery selector.
+You can also insert an explicit call to flipv() method on any element in the page using ajQuery selector.
 
 example: <code>$('p').flipv();</code>
 
-You don’t need to specify <code>filter</code> and <code>writing-mode</code> attributs for
-IE; the plugin will do it.
+You don't need to specify <code>filter</code> and <code>writing-mode</code> attributs for IE; the plugin will do it.
 
-You could define a width or an height for your text. In this case, give sizes for
-horizontal display and the plugin will invert values automatically.
+You could define a width or an height for your text. In this case, give sizes for horizontal display and the plugin will invert values automatically.
 
 h1. Limits
 
