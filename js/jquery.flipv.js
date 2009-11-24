@@ -21,7 +21,7 @@ $.fn.flipv = function(options) {
 		var heightsav = $(this).height();
 		var widthsav = textsav.length*fontsizesav*.60;
 		
-		var colorsav = '#CCC';
+		var colorsav = '#000000';
 		if ($(this).css('color'))
 			colorsav = $(this).css('color');
 			
