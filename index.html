@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>jQuery flipv demonstration</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/cvi_text_lib.js"></script>
+<script type="text/javascript" src="js/jquery.flipv.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("p.click").bind('click', function (){
+			$(this).text('clicked').flipv().unbind('click');
+			return false;
+		});
+});
+</script>
+<style type="text/css">
+	body {
+		background: gray;
+		text-align: center;
+	}
+	h1 {
+
+	}
+
+	h2{
+		
+	}
+	p.flipv {
+		font-size: 16px;
+		color: green;
+	}
+	p.click {
+		color: orange;
+	}
+	#page {
+		text-align: left;
+		margin-left: auto;
+		margin-right: auto;
+		width: 700px;
+		background: white;
+		padding: 1em;
+		padding-left: 2em;
+		padding-right: 2em;
+	}
+	p.italic {
+		font-style: italic;
+	}
+
+</style>
+<body>
+
+<div id="page">
+	<h1>jQuery flipv demonstration</h1>
+	<p class="italic">cross browser implementation for vertical texts</p>
+
+	<p><a href="http://www.openstudio.fr/jQuery-flipv.html">Download and documentation</a></p>
+
+	<h2>Example 1</h2>
+	<p>just add the class 'flipv' to element</p>
+	<tt>&lt;p class='flipv'>jQuery.flipv demo&lt;/p></tt>
+	<p class='flipv'>jQuery.flipv demo</p>
+	
+	<h2>Example 2</h2>
+
+	<p>using 'flipv()' method on a jQuery selector</p>
+	<tt>$('p').flipv();</tt>
+	
+	<p class='click'>click for flip !</p> 
+
+	<h2>limits</h2>
+	<ul>
+		<li>only verdana font is supported</li>
+		<li>one line only</li>
+	</ul>
+</div>
+</body>
+</html>
