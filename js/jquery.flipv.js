@@ -25,6 +25,8 @@ $.fn.flipv = function(angle) {
         angle = angle % 360;
         angle *= Math.PI/180;
         var angle2 = Math.PI/2 - Math.abs(Math.PI/2 - angle);
+        var angle3 = (angle > Math.PI) ? angle - Math.PI : angle;
+        var angle4 = Math.PI + angle;
         
 		var htmlsav = $(this).html();
 		var textsav = $(this).text();
@@ -32,14 +34,17 @@ $.fn.flipv = function(angle) {
 		if ($(this).css('font-size') != '') {
 			fontsizesav = parseInt($(this).css('font-size'));
 		}
-        var h = $(this).height();
+        var h = $(this).height()+2;
         var w = textsav.length*fontsizesav*0.60;
-		//var heightsav = h*2;
-        var heightsav = Math.cos(angle2)*w + Math.sin(angle)*h + h
+        var heightsav = Math.ceil(Math.cos(angle2)*w + Math.sin(angle3)*h);
         //alert("width is "+heightsav);
 		var widthsav = w;
         widthsav += Math.tan(Math.PI/2 - angle2) * h;
-        widthsav *= Math.sin(angle);
+        if (angle <= Math.PI) {
+            widthsav *= Math.sin(angle);
+        } else {
+        }
+        widthsav = Math.ceil(widthsav);
         //alert("height is "+widthsav);
 		
 		var colorsav = '#000000';
@@ -61,6 +66,7 @@ $.fn.flipv = function(angle) {
 
 function vertical_text(mytext, fontsize, colorsav, my_id, angle, txt_width, txt_height, can_width, can_height){
     var angle2 = Math.PI/2 - Math.abs(Math.PI/2 - angle);
+    var angle3 = angle - Math.PI;
  
 	var canvas = document.getElementById(my_id);
 	if (canvas.getContext){
@@ -70,18 +76,16 @@ function vertical_text(mytext, fontsize, colorsav, my_id, angle, txt_width, txt_
             //context.strokeRect(0,0,txt_width,txt_height);
             if (angle <= Math.PI/2) {
                 context.translate(Math.sin(angle) * txt_height, 0);
-            } else {
+            } else if (angle > Math.PI/2 && angle <= Math.PI) {
                 context.translate(Math.cos(angle2) * txt_width, 0);
+            } else {
+                context.translate(Math.cos(angle2) * txt_width + Math.sin(angle3) * txt_height, Math.sin(angle3) * txt_width);
             }
 			context.rotate(angle);
 			if (angle > Math.PI/2)
                 context.translate(0,-txt_height);
 			context.strokeStyle = colorsav;
-			context.strokeText(mytext, 0,                      0,                      fontsize-2); //   0 deg
-			//context.strokeText(mytext, 4 + txt_height/2,         4 - txt_height,           fontsize-2); //  45 deg
-			//context.strokeText(mytext, 0,                      0 - fontsize*3/2, fontsize-2);       //  90 deg
-            //context.strokeText(mytext, 0 - (can_width) * Math.PI/6, 0 - fontsize*2*Math.PI, fontsize-2); // 135 deg
-            //context.strokeText(mytext, 0 - can_width + txt_height, 0 - fontsize*3/2, fontsize-2);       // 180 deg
+			context.strokeText(mytext,0,0,fontsize-2);
             //context.strokeRect(0,0,txt_width,txt_height);
 		}
 	}

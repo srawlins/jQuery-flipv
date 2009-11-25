@@ -52,3 +52,19 @@ h1. Limits
 * Verdana font only
 
 <a href="http://en.wikipedia.org/wiki/licence_GPL">licence GPL</a>
+
+h1. Additions
+
+I migrated jQuery-flipv() to Github, and have added a few things:
+
+* You can specify an angle as a class. Example: <code><p class='flipv 60-degrees'>my text</p></code>
+* You can specify an angle when calling the function. Example: <code>$('p').flipv(60);</code>
+* Angles have been tested between 0 and 270. jQuery-flipv() will wrap around 360 degrees.
+* Sizing has been fixed.
+
+h1. More Limits
+
+I found some more limitations.
+
+* Angles between 270 and 359 probably don't work.
+* Text widths are a guess based on an average. Verdana is not mono-spaced, so be wary of many 'm's. I know there is a way to see actual width, based on a video by Mozilla regarding Bespin.
