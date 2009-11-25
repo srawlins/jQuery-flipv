@@ -22,7 +22,10 @@ $.fn.flipv = function(angle) {
             if (angle == null)
                 angle = 90;
         }
+        angle = angle % 360;
         angle *= Math.PI/180;
+        var angle2 = Math.PI/2 - Math.abs(Math.PI/2 - angle);
+        
 		var htmlsav = $(this).html();
 		var textsav = $(this).text();
 		var fontsizesav = '13';
@@ -32,12 +35,12 @@ $.fn.flipv = function(angle) {
         var h = $(this).height();
         var w = textsav.length*fontsizesav*0.60;
 		//var heightsav = h*2;
-        var heightsav = Math.cos(angle)*w + Math.sin(angle)*h
-        alert("width is "+heightsav);
+        var heightsav = Math.cos(angle2)*w + Math.sin(angle)*h + h
+        //alert("width is "+heightsav);
 		var widthsav = w;
-        widthsav += Math.tan(Math.PI/2 - angle) * h;
+        widthsav += Math.tan(Math.PI/2 - angle2) * h;
         widthsav *= Math.sin(angle);
-        alert("height is "+widthsav);
+        //alert("height is "+widthsav);
 		
 		var colorsav = '#000000';
 		if ($(this).css('color'))
@@ -48,7 +51,7 @@ $.fn.flipv = function(angle) {
 		} else {
 			var my_id = "canvas"+parseInt(Math.random()*1000);
 			$(this).empty().append("<canvas id='"+my_id+"' width='"+heightsav+"' height='"+widthsav+"'>"+htmlsav+"</canvas>");
-			vertical_text(textsav, fontsizesav, colorsav, my_id, angle);
+			vertical_text(textsav, fontsizesav, colorsav, my_id, angle, w, h, heightsav, widthsav);
 		}
 		
 	});
@@ -56,17 +59,30 @@ $.fn.flipv = function(angle) {
 };
 })(jQuery);
 
-function vertical_text(mytext, fontsize, colorsav, my_id, angle){
+function vertical_text(mytext, fontsize, colorsav, my_id, angle, txt_width, txt_height, can_width, can_height){
+    var angle2 = Math.PI/2 - Math.abs(Math.PI/2 - angle);
+ 
 	var canvas = document.getElementById(my_id);
 	if (canvas.getContext){
 		var context = canvas.getContext('2d');
 		set_textRenderContext(context);
 		if(check_textRenderContext(context)) {
-			context.translate(80,0);
-			//context.translate(80,0);
+            //context.strokeRect(0,0,txt_width,txt_height);
+            if (angle <= Math.PI/2) {
+                context.translate(Math.sin(angle) * txt_height, 0);
+            } else {
+                context.translate(Math.cos(angle2) * txt_width, 0);
+            }
 			context.rotate(angle);
+			if (angle > Math.PI/2)
+                context.translate(0,-txt_height);
 			context.strokeStyle = colorsav;
-			context.strokeText(mytext, 3, 84 - (3*fontsize/2), fontsize-2);
+			context.strokeText(mytext, 0,                      0,                      fontsize-2); //   0 deg
+			//context.strokeText(mytext, 4 + txt_height/2,         4 - txt_height,           fontsize-2); //  45 deg
+			//context.strokeText(mytext, 0,                      0 - fontsize*3/2, fontsize-2);       //  90 deg
+            //context.strokeText(mytext, 0 - (can_width) * Math.PI/6, 0 - fontsize*2*Math.PI, fontsize-2); // 135 deg
+            //context.strokeText(mytext, 0 - can_width + txt_height, 0 - fontsize*3/2, fontsize-2);       // 180 deg
+            //context.strokeRect(0,0,txt_width,txt_height);
 		}
 	}
 }
