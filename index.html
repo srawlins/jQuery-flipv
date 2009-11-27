@@ -27,6 +27,7 @@ $(document).ready(function(){
 	p.flipv {
 		font-size: 16px;
 		color: green;
+        margin: 4px 0px;
 	}
 	p.click {
 		color: orange;
@@ -57,7 +58,7 @@ $(document).ready(function(){
 	<h2>Example 1</h2>
 	<p>just add the class 'flipv' to element</p>
 	<tt>&lt;p class='flipv'>jQuery.flipv demo&lt;/p></tt>
-	<p class='flipv 270-degrees' style='font-size: 18;'>jQuery.flipv demo</p>
+	<p class='flipv 270-degrees' style='font-size: 24;'>jQuery.flipv demo</p>
 	<p class='flipv 180-degrees' style='font-size: 18;'>Upside Down!</p>
 	
 	<h2>Example 2</h2>
@@ -67,6 +68,13 @@ $(document).ready(function(){
 	
 	<p class='click'>click for flip !</p> 
 
+    <h2>Example 3</h3>
+    
+    <p>Now working with <span class='flipv 10-degrees' style='color: blue; font-size: 13;'>MWMWM long letters MWMWM</span>.</p>
+    <p>And with <span class='flipv 10-degrees' style='color: blue; font-size: 13;'>IJIJI short letters IJIJI</span>.</p>
+    <P><span class='flipv 90-degrees'>Spans</span><span class='flipv 75-degrees'>work</span><span class='flipv 60-degrees'>too!</span></p>
+    <span class='flipv 120-degrees' style="border: solid 2px #FF0000; color: #555555">Borders!</span>
+    
 	<h2>limits</h2>
 	<ul>
 		<li>only verdana font is supported</li>
